@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Dia&display=swap");
+
+body {
+  background-color: #dda0dd;
+  font-family: "Dia", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#chatbot-container {
+  width: 445px;
+  height: 415px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: -10px;
+}
+
+#chatbot-header {
+  background-color: #f4f4f4;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px;
+}
+
+#chatbot-header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+#chatbot-start-button {
+  background-color: #8dd471;
+  color: #990499;
+  font-size: 15px;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 32px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  display: block;
+  font-family: monospace;
+  margin: 15px;
+  margin-bottom: -45px;
+}
+
+#chatbot-messages {
+  overflow-y: scroll;
+  height: 400px;
+  padding: 20px;
+}
+
+#chatbot-form {
+  border-top: 1px solid #ddd;
+  padding: 20px;
+}
+
+#chatbot-input {
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  padding: 12px;
+  outline: none;
+}
+
+#chatbot-form button[type="submit"] {
+  float: right;
+  background-color: #00b8d4;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.recommendation-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.recommendation-item {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.recommendation-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.recommendation-item h3 {
+  margin: 10px 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+.recommendation-item p {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.recommendation-item button {
+  background-color: #8dd471;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
