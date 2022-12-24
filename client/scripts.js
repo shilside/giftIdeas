@@ -1,16 +1,16 @@
+const API_KEY = "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";
 document
   .getElementById("chatbot-start-button")
   .addEventListener("click", function () {
     // Hide start button
     this.style.display = "none";
-
     // Show loading animation
     const loadingDots = document.createElement("div");
     loadingDots.innerHTML = "&#8226;&#8226;&#8226;";
     loadingDots.style.fontSize = "40px";
     loadingDots.style.textAlign = "center";
     document.getElementById("loadingdots").appendChild(loadingDots);
-
+    document.getElementById("chatbot-input-section").style.display = "block";
     // Run main function
     main().then(() => {
       // Remove loading animation
@@ -27,7 +27,7 @@ async function getRecommendations(prompt) {
     headers: {
       "Content-Type": "application/json",
       Authorization:
-        "Bearer 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",
+        "Bearer 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",
     },
     body: JSON.stringify({
       prompt,

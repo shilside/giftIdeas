@@ -34,14 +34,18 @@
           <p>My name is Josh</p>
         </div>
       </div>
-      <input
-        type="text"
-        id="chatbot-input"
-        placeholder="Ask the chatbot for gift recommendations"
-      />
-      <button type="submit">
-        <span class="material-symbols-rounded"> send </span>
-      </button>
+      <div id="chatbot-input-section">
+        <form id="chatbot-form" name="chatbot-form">
+          <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Ask the chatbot for gift recommendations"
+          />
+          <button type="submit">
+            <span class="material-symbols-rounded"> send </span>
+          </button>
+        </form>
+      </div>
     </div>
     <button id="chatbot-start-button">Start</button>
     <div id="loadingdots"></div>
