@@ -1,12 +1,3 @@
-const openai = require("openai");
-
-console.log(openai);
-
-const configuration = new openai.Configuration({
-  apiKey: "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",
-});
-const openaiApi = new openai.OpenAIApi(configuration);
-
 document
   .getElementById("chatbot-start-button")
   .addEventListener("click", function () {
@@ -17,7 +8,8 @@ document
     const loadingDots = document.createElement("div");
     loadingDots.innerHTML = "&#8226;&#8226;&#8226;";
     loadingDots.style.fontSize = "40px";
-    document.getElementById("chatbot-messages").appendChild(loadingDots);
+    loadingDots.style.textAlign = "center";
+    document.getElementById("loadingdots").appendChild(loadingDots);
 
     // Run main function
     main().then(() => {
@@ -29,13 +21,22 @@ document
     });
   });
 
-async function getGiftRecommendations(prompt) {
-  const response = await openai.createCompletion({
-    prompt,
-    model: "text-davinci-002",
-    temperature: 0.5,
+async function getRecommendations(prompt) {
+  const response = await fetch(`https://api.openai.com/v1/completions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer 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",
+    },
+    body: JSON.stringify({
+      prompt,
+      model: "text-davinci-002",
+      temperature: 0.5,
+    }),
   });
-  return response.choices[0].text;
+  const jsonResponse = await response.json();
+  return jsonResponse.choices[0].text;
 }
 
 async function askQuestion(question) {
@@ -70,7 +71,7 @@ async function askQuestion(question) {
 
 async function main() {
   // Greet user
-  const greeting = await getGiftRecommendations(
+  const greeting = await getRecommendations(
     "Hello! I am Santana, your personal gift recommendation chatbot. How can I help you today?"
   );
   const message = document.createElement("div");
@@ -109,7 +110,7 @@ async function main() {
 
   // Get recommendations
   const prompt = `I am interested in finding gift recommendations for someone who is ${age}, ${gender}, ${nationality}, and has a vibe of ${vibe}. They are interested in ${interests} and their career is ${career}. They enjoy ${hobby} and might like a gift related to ${gift}. They are ${techSavvy} when it comes to technology and have a price range of ${priceRange}. Can you help me find some gift recommendations?`;
-  const recommendations = await getGiftRecommendations(prompt);
+  const recommendations = await getRecommendations(prompt);
   const message2 = document.createElement("div");
   message2.innerText = recommendations;
   document.getElementById("chatbot-messages").appendChild(message2);

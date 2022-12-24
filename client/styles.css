@@ -1,8 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Dia&display=swap");
-
 body {
   background-color: #dda0dd;
-  font-family: "Dia", sans-serif;
+  font-family: "Red Rose", cursive;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +11,7 @@ body {
 }
 
 #chatbot-container {
+  position: relative;
   width: 445px;
   height: 415px;
   background-color: #fff;
@@ -31,7 +30,9 @@ body {
 
 #chatbot-header h1 {
   margin: 0;
-  font-size: 20px;
+  font-size: 21px;
+  text-align: center;
+  font-weight: 100;
 }
 
 #chatbot-start-button {
@@ -52,8 +53,70 @@ body {
 
 #chatbot-messages {
   overflow-y: scroll;
-  height: 400px;
+  height: 60%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+#chatbot-messages::-webkit-scrollbar {
+  width: 0;
+}
+
+#chatbot-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#chatbot-messages::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+#chatbot-messages::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#chatbot-messages div {
+  border-radius: 1.15rem;
+  line-height: 1.25;
+  max-width: 45%;
+  padding: 0.5rem 0.875rem;
+  position: relative;
+  word-wrap: break-word;
+}
+
+#botsmessage {
+  background-color: #3bb948;
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 50px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  max-width: 80%;
+  align-self: flex-start;
+}
+
+#usersmessage {
+  background-color: #010100;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  max-width: 80%;
+  align-self: flex-end;
+}
+
+#chatbot-footer {
+  background-color: #f4f4f4;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   padding: 20px;
+  position: static;
+  bottom: 0;
 }
 
 #chatbot-form {
@@ -64,12 +127,13 @@ body {
 #chatbot-input {
   width: 100%;
   border: none;
-  font-size: 16px;
-  padding: 12px;
+  font-size: 14px;
+  padding: 20px;
   outline: none;
 }
 
-#chatbot-form button[type="submit"] {
+#chatbot-container button[type="submit"] {
+  position: absolute;
   float: right;
   background-color: #00b8d4;
   color: #fff;
