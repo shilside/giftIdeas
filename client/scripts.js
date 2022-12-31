@@ -1,16 +1,39 @@
-const API_KEY = "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";
 document
   .getElementById("chatbot-start-button")
   .addEventListener("click", function () {
     // Hide start button
     this.style.display = "none";
+
+    //show
+    //create botmessage div and append to chatbot-messages function
+    const createbotMessageBox = () => {
+      const botsmessage = document.createElement("div");
+      botsmessage.id = "botMsg";
+      document.getElementById("chatbot-messages").appendChild(botsmessage);
+    };
+
+    msgWindow = document.getElementById("chatbot-messages");
+    let xH = msgWindow.scrollHeight;
+    msgWindow.scrollTo(0, xH);
+
+    //greets user
+    const greetUser = () => {
+      // call createbotMessageBox function to create botmessage div
+      createbotMessageBox();
+      const greeting = document.createElement("p");
+      greeting.innerText =
+        "Hello! I am Santana, your personal gift recommendation chatbot!!!";
+      document.getElementById("botMsg").appendChild(greeting);
+    };
+
     // Show loading animation
     const loadingDots = document.createElement("div");
     loadingDots.innerHTML = "&#8226;&#8226;&#8226;";
     loadingDots.style.fontSize = "40px";
     loadingDots.style.textAlign = "center";
     document.getElementById("loadingdots").appendChild(loadingDots);
-    document.getElementById("chatbot-input-section").style.display = "block";
+
+    greetUser();
     // Run main function
     main().then(() => {
       // Remove loading animation
@@ -27,7 +50,7 @@ async function getRecommendations(prompt) {
     headers: {
       "Content-Type": "application/json",
       Authorization:
-        "Bearer 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",
+        "Bearer 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",
     },
     body: JSON.stringify({
       prompt,
@@ -41,10 +64,15 @@ async function getRecommendations(prompt) {
 
 async function askQuestion(question) {
   // Display question in chatbot messages
-  const chatbotMessage = document.createElement("div");
-  chatbotMessage.innerText = question;
-  document.getElementById("chatbot-messages").appendChild(chatbotMessage);
 
+  const questionDiv = document.createElement("div");
+  questionDiv.className = "questionDiv";
+  document.getElementById("chatbot-messages").appendChild(questionDiv);
+
+  // Display the question in the div element
+  const chatbotMessage = document.createElement("p");
+  chatbotMessage.innerText = question;
+  questionDiv.appendChild(chatbotMessage);
   // Show form
   document.getElementById("chatbot-form").style.display = "block";
   // Wait for user to submit their response
@@ -53,8 +81,8 @@ async function askQuestion(question) {
       .getElementById("chatbot-form")
       .addEventListener("submit", function (e) {
         e.preventDefault();
-        resolve(document.getElementById("chatbot-input").value);
-        this.reset();
+        const userResponse = document.getElementById("chatbot-input").value;
+        resolve(userResponse);
       });
   });
 
@@ -64,6 +92,7 @@ async function askQuestion(question) {
   // Display user's response in chatbot messages
   const userMessage = document.createElement("div");
   userMessage.innerText = response;
+  userMessage.id = "usersmessage";
   document.getElementById("chatbot-messages").appendChild(userMessage);
 
   return response;
@@ -71,19 +100,23 @@ async function askQuestion(question) {
 
 async function main() {
   // Greet user
-  const greeting = await getRecommendations(
-    "Hello! I am Santana, your personal gift recommendation chatbot. How can I help you today?"
-  );
-  const message = document.createElement("div");
-  message.innerText = greeting;
-  document.getElementById("chatbot-messages").appendChild(message);
+  // const greeting = await getRecommendations(
+  //   "Hello! I am Santana, your personal gift recommendation chatbot. How can I help you today?"
+  // );
+  // const message = document.createElement("div");
+  // message.innerText = greeting;
+  // document.getElementById("chatbot-messages").appendChild(message);
 
   // Get user's interests
   const interests = await askQuestion("What are you interested in?");
+  console.log(interests);
+
   const age = await askQuestion("How old are you?");
+  console.log(age);
 
   // Get user's gender
   const gender = await askQuestion("What is your gender?");
+  console.log(gender);
 
   // Get user's nationality
   const nationality = await askQuestion("What is your nationality?");
@@ -110,6 +143,7 @@ async function main() {
 
   // Get recommendations
   const prompt = `I am interested in finding gift recommendations for someone who is ${age}, ${gender}, ${nationality}, and has a vibe of ${vibe}. They are interested in ${interests} and their career is ${career}. They enjoy ${hobby} and might like a gift related to ${gift}. They are ${techSavvy} when it comes to technology and have a price range of ${priceRange}. Can you help me find some gift recommendations?`;
+  console.log(prompt);
   const recommendations = await getRecommendations(prompt);
   const message2 = document.createElement("div");
   message2.innerText = recommendations;
